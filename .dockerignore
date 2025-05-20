@@ -1,0 +1,7 @@
+.cursorrules
+.dockerignore
+.env
+.idea
+Dockerfile
+node_modules
+.next/

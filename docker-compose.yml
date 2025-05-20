@@ -1,0 +1,49 @@
+# Services
+services:
+  hono-api:
+    container_name: hono-api
+    build:
+      context: .
+      dockerfile: ./apps/hono-api/Dockerfile
+    env_file:
+      - ./apps/hono-api/.env
+    restart: always
+    ports:
+      - 4000:4000
+    networks:
+      - base_network
+    volumes:
+      - ./apps/hono-api/database:/app/database
+      - ./apps/hono-api/public:/app/public
+      - ./apps/hono-api/upload:/app/upload
+      - ./apps/hono-api/logs:/app/logs
+  next-ready-stack:
+    container_name: next-ready-stack
+    build:
+      context: .
+      dockerfile: ./apps/next-ready-stack/Dockerfile
+    env_file:
+      - ./apps/next-ready-stack/.env
+    restart: always
+    ports:
+      - 3000:3000
+    networks:
+      - base_network
+    volumes:
+      - ./apps/next-ready-stack/logs:/app/apps/next-ready-stack/logs
+      - ./apps/next-ready-stack/database:/app/apps/next-ready-stack/database
+  single-page-react:
+    container_name: single-page-react
+    build:
+      context: .
+      dockerfile: ./apps/single-page-react/Dockerfile
+    env_file:
+      - ./apps/single-page-react/.env
+    restart: always
+    ports:
+      - 3001:3000
+# Define a network, which allows containers to communicate
+# with each other, by using their container name as a hostname
+networks:
+  base_network:
+    external: true

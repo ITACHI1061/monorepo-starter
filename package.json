@@ -1,0 +1,36 @@
+{
+  "name": "monorepo-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A modern, production-ready monorepo starter",
+  "repository": "https://github.com/hyi86/monorepo-starter.git",
+  "license": "MIT",
+  "author": "henry hong <hyi8656@gmail.com>",
+  "type": "module",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"apps/**/*.{css,html,js,json,md,mdx,mjs,mts,sql,ts,tsx,yml,yaml}\"",
+    "check-types": "turbo run check-types",
+    "test": "turbo run test",
+    "cli": "pnpm -F @monorepo-starter/cli run"
+  },
+  "prettier": {
+    "organizeImportsSkipDestructiveCodeActions": true,
+    "plugins": [
+      "prettier-plugin-organize-imports",
+      "prettier-plugin-tailwindcss"
+    ],
+    "printWidth": 120,
+    "singleQuote": true
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "prettier-plugin-organize-imports": "^4.1.0",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "turbo": "^2.5.3",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@10.10.0"
+}
