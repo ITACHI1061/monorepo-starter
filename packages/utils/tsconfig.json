@@ -1,0 +1,15 @@
+{
+  "extends": "@monorepo-starter/typescript-config/react-library.json",
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["dom", "ES2015"],
+    "sourceMap": false,
+    "types": ["node"],
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["."],
+  "exclude": ["dist", "build", "node_modules"]
+}
