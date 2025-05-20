@@ -113,7 +113,7 @@ pnpm rm cmdk react-day-picker
 pnpm add cmdk react-day-picker
 
 # Formatting
-pnpm -w run format "packages/ui/**/*.*"
+pnpm -w run format:single "packages/ui/**/*.*"
 ```
 
 ## Re-initialize
