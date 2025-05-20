@@ -1,0 +1,11 @@
+Common:
+  language: English
+  hello: Hello
+
+ExampleIntro:
+  title: Internationalization Example
+  list:
+    - Example page layout to apply language settings
+    - Self-built without external libraries (<code>next-intl</code>, <code>react-i18next</code> etc.)
+    - Use <code>getDictionary(lang)</code> to retrieve and use language data
+    - Only some pages can be internationalized

@@ -1,0 +1,51 @@
+# Code Highlight in MDX
+
+### 단어 하이라이트
+
+```tsx
+// [!code word:onClick]
+import React from 'react';
+
+export default function Button({ label }: { label: string }) {
+  return (
+    <button
+      onClick={() => alert('Clicked')}
+      className="px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      {label}
+    </button>
+  );
+}
+```
+
+
+### 라인 하이라이트
+
+```yaml
+a: 1
+# [!code highlight:2]
+b: 2
+c: 3
+case: |
+  멀티라인
+  티
+  라
+  인    스트링
+```
+
+
+### 라인 번호 표시
+
+```ts
+function add(a: number, b: number) {
+  // [!code error:1]
+  return a + b; // Error this line
+}
+
+
+function minus(a: number, b: number) {
+  // [!code warning:1] 
+  return a - b; // Warning this line
+}
+```
+
