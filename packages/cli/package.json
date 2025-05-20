@@ -1,0 +1,25 @@
+{
+  "name": "@monorepo-starter/cli",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "init": "tsx src/init.ts",
+    "unused-import": "tsx src/unused-import.ts"
+  },
+  "devDependencies": {
+    "@monorepo-starter/typescript-config": "workspace:*",
+    "@monorepo-starter/utils": "workspace:*",
+    "@inquirer/prompts": "^7.5.1",
+    "@types/node": "catalog:",
+    "change-case": "^5.4.4",
+    "diff": "^8.0.1",
+    "fast-glob": "^3.3.3",
+    "handlebars": "^4.7.8",
+    "nanoid": "^5.1.5",
+    "ts-morph": "^25.0.1",
+    "tsx": "^4.19.4",
+    "type-fest": "^4.41.0",
+    "typescript": "catalog:"
+  }
+}
