@@ -70,12 +70,30 @@ This project is structured to allow experimentation and operation with various s
 
 ## 🚀 Getting Started
 
+### Installation
+
 ```bash
 git clone https://github.com/hyi86/monorepo-starter.git
 cd monorepo-starter
 pnpm install
 pnpm run cli init # drizzle-related files that appear after this command are optional to push
 pnpm dev
+```
+
+### Connect to Vercel
+
+```bash
+# Install vercel globally
+pnpm add -g vercel
+
+# Login to Vercel
+vercel login
+
+# Link to Vercel
+vercel link
+
+# first preview build
+vercel
 ```
 
 <br />
