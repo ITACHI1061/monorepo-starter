@@ -91,8 +91,10 @@ vercel login
 
 # Link to Vercel
 vercel link
+# Update `Project Settings` > `Build and Deployment` > `Root Directory` to `apps/next-ready-stack`
+# Update `Project Settings` > `Build and Deployment` > `Framework Settings` > `Build Command` to `cd ../../ && pnpm turbo build --filter=next-ready-stack...`
 
-# first preview build
+# Run first preview build
 vercel
 ```
 
