@@ -42,19 +42,19 @@ export function WebPushProvider({ children }: { children: ReactNode }) {
     async function registerServiceWorker() {
       try {
         if (typeof window !== 'undefined' && 'serviceWorker' in navigator && 'Notification' in window) {
-          devLog('info', `🔄 Initializing service worker`);
+          devLog('process', `Initializing service worker`);
 
           const registration = await navigator.serviceWorker.register(serviceWorkerPath, { scope: '/' });
-          devLog('success', `✅ Service Worker registered`);
+          devLog('success', `Service Worker registered`);
 
           // Wait for the service worker to be ready
           await navigator.serviceWorker.ready;
-          devLog('success', `✅ Service Worker is ready`);
+          devLog('success', `Service Worker is ready`);
           setRegistration(registration);
 
           // Check existing subscription
           const existingSub = await registration.pushManager.getSubscription();
-          devLog('success', `✅ Existing subscription`);
+          devLog('success', `Existing subscription`);
           setSubscription(existingSub);
         }
       } catch (error) {

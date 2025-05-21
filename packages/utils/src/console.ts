@@ -40,7 +40,7 @@ export function devLog(type: LogType, ...args: any[]) {
   if (typeof window !== 'undefined') {
     switch (type) {
       case 'process':
-        log(`%c⏳ ${args[0]}`, 'color:rgb(148,163,184);', ...args.slice(1));
+        log(`%c⏳ ${args[0]}`, 'color:rgb(161,161,170);', ...args.slice(1));
         return;
       case 'success':
         log(`%c✅ ${args[0]}`, 'color:rgb(21,128,61);', ...args.slice(1));
