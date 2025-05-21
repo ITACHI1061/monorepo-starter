@@ -1,10 +1,11 @@
 'use server';
 
-import { copyToClipboardCommand, openInEditorCommand, type EditorType } from '@monorepo-starter/utils/commands';
+import { copyToClipboardCommand, openInEditorCommand } from '@monorepo-starter/utils/commands';
 import { devLog } from '@monorepo-starter/utils/console';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
+import { env } from '~/env';
 
 // 코드 저장
 export async function saveCodeToFile(fileName: string, code: string) {
@@ -36,7 +37,7 @@ export async function openInCursorEditor(fileName: string) {
   }
 
   try {
-    execSync(openInEditorCommand(process.env.CODE_EDITOR as EditorType, fileName, 1));
+    execSync(openInEditorCommand(env.CODE_EDITOR, fileName, 1));
   } catch (error) {
     devLog('error', error);
   }

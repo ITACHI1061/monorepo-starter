@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   productionBrowserSourceMaps: true,
   serverExternalPackages: ['pino', 'pino-pretty'],
-  transpilePackages: ['@monorepo-starter/utils', '@monorepo-starter/ui'],
+  transpilePackages: ['@monorepo-starter/utils', '@monorepo-starter/ui', '@t3-oss/env-nextjs', '@t3-oss/env-core'],
   experimental: {
     optimizePackageImports: ['@mantine/hooks'],
     serverActions: {

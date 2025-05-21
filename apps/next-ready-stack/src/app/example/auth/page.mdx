@@ -3,12 +3,12 @@
 - 자체구축
 - `JWT` 기반의 인증 시스템 사용
 - `Access Token`과 `Refresh Token`을 함께 사용하는 이중 토큰 구조
-  - `Access Token`: 기본 15분(`process.env.ACCESS_TOKEN_SECRET_TIME`)
-  - `Refresh Token`: 기본 하루(`process.env.REFRESH_TOKEN_SECRET_TIME`)
+  - `Access Token`: 기본 15분(`env.ACCESS_TOKEN_SECRET_TIME`)
+  - `Refresh Token`: 기본 하루(`env.REFRESH_TOKEN_SECRET_TIME`)
 - 토큰은 HTTP Only 쿠키로 저장되어 XSS 공격 방지
 - 토큰은 Secure 플래그가 설정되어 HTTPS에서만 전송
 - `.env`를 통한 토큰 비밀키 관리
 - `checkAuthorization()` 함수를 통한 인증 상태 및 정보 조회
 - `Server Component` 전용
-- 접근제어: `src/lib/auth/middleware.ts` 파일에 보호된 경로 추가
+- 접근제어: `src/lib/auth/middleware.ts` 파일에 접근 제한 경로 추가
 - 토큰 만료 시 자동 갱신 메커니즘 적용

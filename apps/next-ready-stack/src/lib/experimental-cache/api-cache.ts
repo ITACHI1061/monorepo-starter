@@ -10,10 +10,11 @@ import { promisify } from 'node:util';
 import { gunzip, gzipSync } from 'node:zlib';
 import { db } from '~/db';
 import { cacheTable } from '~/db/schema';
+import { env } from '~/env';
 
 // 캐시 파일 최대 크기
 const MAX_SQLITE_BYTES = 1 * 1024 * 1024; // 1MB 이상이면, SQLite 캐시 미사용
-const API_CACHE_PATH = process.env.API_CACHE_PATH || '.cache';
+const API_CACHE_PATH = env.API_CACHE_PATH;
 const asyncGunzip = promisify(gunzip);
 const cacheDir = path.join(process.cwd(), API_CACHE_PATH);
 

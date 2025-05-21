@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import pino from 'pino';
+import { env } from '~/env';
 
 const development = process.env.NODE_ENV !== 'production';
 
@@ -17,7 +18,7 @@ const development = process.env.NODE_ENV !== 'production';
  * logger.info('Hello, world!');
  */
 export function createLogger(name: string) {
-  const destination = path.join(process.env.LOG_FILE_PATH!, `${name}.log`);
+  const destination = path.join(env.LOG_FILE_PATH, `${name}.log`);
   const dirname = path.dirname(destination);
 
   try {

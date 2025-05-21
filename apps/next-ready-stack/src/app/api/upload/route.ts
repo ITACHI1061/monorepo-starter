@@ -2,6 +2,7 @@ import { NextRequest } from 'next/server';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Readable } from 'stream';
+import { env } from '~/env';
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -10,7 +11,7 @@ export async function GET(req: NextRequest) {
     return new Response('Missing fileName', { status: 400 });
   }
   try {
-    const uploadDir = path.join(process.cwd(), process.env.UPLOAD_PATH || 'upload');
+    const uploadDir = path.join(process.cwd(), env.UPLOAD_PATH);
     const targetPath = path.join(uploadDir, fileName);
     // 파일이 존재하는지 확인
     if (!fs.existsSync(targetPath)) {
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const uploadDir = path.join(process.cwd(), process.env.UPLOAD_PATH || 'upload');
+    const uploadDir = path.join(process.cwd(), env.UPLOAD_PATH);
     const targetPath = path.join(uploadDir, fileName);
 
     fs.mkdirSync(uploadDir, { recursive: true });

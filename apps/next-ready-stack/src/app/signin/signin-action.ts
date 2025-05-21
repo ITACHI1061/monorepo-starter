@@ -3,6 +3,7 @@
 import { cookies } from 'next/headers';
 import parseDuration from 'parse-duration';
 import z from 'zod';
+import { env } from '~/env';
 import { generateAccessToken, generateRefreshToken } from '~/lib/auth/jwt';
 
 const signinSchema = z.object({
@@ -31,11 +32,20 @@ export async function signinAction(
   const accessToken = await generateAccessToken(userId);
   const refreshToken = await generateRefreshToken(userId);
 
-  const accessTokenMaxAge = parseDuration(process.env.ACCESS_TOKEN_SECRET_TIME, 's') || 60 * 15;
-  const refreshTokenMaxAge = parseDuration(process.env.REFRESH_TOKEN_SECRET_TIME, 's') || 60 * 60 * 24 * 7;
+  const accessTokenMaxAge = parseDuration(env.ACCESS_TOKEN_SECRET_TIME, 's') || 60 * 15;
+  const refreshTokenMaxAge = parseDuration(env.REFRESH_TOKEN_SECRET_TIME, 's') || 60 * 60 * 24 * 7;
 
-  cookieStore.set('access-token', accessToken, { httpOnly: true, secure: true, maxAge: accessTokenMaxAge });
-  cookieStore.set('refresh-token', refreshToken, { httpOnly: true, secure: true, maxAge: refreshTokenMaxAge });
+  cookieStore.set(env.ACCESS_TOKEN_COOKIE_NAME, accessToken, {
+    httpOnly: true,
+    secure: true,
+    maxAge: accessTokenMaxAge,
+  });
+
+  cookieStore.set(env.REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
+    httpOnly: true,
+    secure: true,
+    maxAge: refreshTokenMaxAge,
+  });
 
   return { success: true };
 }

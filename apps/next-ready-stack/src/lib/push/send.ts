@@ -1,5 +1,6 @@
 import { devLog } from '@monorepo-starter/utils/console';
 import webPush from 'web-push';
+import { env } from '~/env';
 
 /**
  * 푸시 알림 전송
@@ -8,9 +9,9 @@ import webPush from 'web-push';
  * @param payload - 푸시 알림 페이로드
  */
 export const sendPushNotification = async (subscription: PushSubscription, payload: string) => {
-  const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
-  const vapidPrivateKey = process.env.NEXT_PUBLIC_VAPID_PRIVATE_KEY;
-  const webPushEmail = process.env.NEXT_PUBLIC_WEB_PUSH_EMAIL;
+  const vapidPublicKey = env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+  const vapidPrivateKey = env.NEXT_PUBLIC_VAPID_PRIVATE_KEY;
+  const webPushEmail = env.NEXT_PUBLIC_WEB_PUSH_EMAIL;
 
   if (!vapidPublicKey || !vapidPrivateKey) {
     throw new Error('VAPID keys are not set');

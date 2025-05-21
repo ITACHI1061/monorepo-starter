@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { isProtectedPath } from '~/lib/auth/middleware';
+import { utils } from '~/env';
 
 /**
  * 로그아웃
@@ -21,7 +21,7 @@ export async function signoutAction(redirectPath?: string) {
   let pathname = cookieStore.get('next-pathname')?.value || '/';
   const search = cookieStore.get('next-search')?.value || '';
 
-  if (isProtectedPath(pathname)) {
+  if (utils.isProtectedPath(pathname)) {
     pathname = '/';
   }
 

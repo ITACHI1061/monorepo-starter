@@ -17,7 +17,7 @@ export default function Home() {
     { href: '/example/nuqs', label: 'Nuqs Utilization', desc: 'Nuqs 쿼리 관리' },
     { href: '/example/experimental', label: 'Experimental Examples', desc: '최신/실험적 기능' },
     { href: '/example/db', label: 'DB Examples', desc: 'DB 연동/CRUD' },
-    { href: '/example/auth', label: 'Authentication/Security', desc: 'JWT, 인증, 보호 라우트' },
+    { href: '/example/auth', label: 'Authentication/Security', desc: 'JWT, 인증, 접근제한 라우트' },
     { href: '/example/ko', label: 'Multilingual/Dynamic Routes', desc: 'i18n, 동적 세그먼트' },
   ];
 

@@ -2,6 +2,7 @@
 
 import { devLog } from '@monorepo-starter/utils/console';
 import { createContext, ReactNode, useContext, useEffect, useState, useTransition } from 'react';
+import { env } from '~/env';
 
 interface SendPushNotificationOptions {
   title: string;
@@ -74,7 +75,7 @@ export function WebPushProvider({ children }: { children: ReactNode }) {
           throw new Error('Push notification permission is not granted');
         }
 
-        const vapidPublicKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+        const vapidPublicKey = env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
         if (!vapidPublicKey) {
           throw new Error('VAPID public key is not set');
         }
