@@ -4,7 +4,6 @@ import { copyToClipboardCommand, openInEditorCommand } from '@monorepo-starter/u
 import { devLog } from '@monorepo-starter/utils/console';
 import { execSync } from 'node:child_process';
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import { env } from '~/env';
 
 // 코드 저장
@@ -31,7 +30,9 @@ export async function getCodeFromFile(fileName: string) {
 }
 
 // 코드 편집기 열기
-export async function openInCursorEditor(fileName: string) {
+export async function openInEditor(fileName: string) {
+  console.log(fileName);
+
   if (fileName.startsWith('~/')) {
     fileName = fileName.replace('~/', './src/');
   }
@@ -46,5 +47,5 @@ export async function openInCursorEditor(fileName: string) {
 // 코드 복사
 export async function copyCodeToClipboard(fileName: string) {
   const code = await getCodeFromFile(fileName);
-  execSync(copyToClipboardCommand(process.platform, os.release(), code));
+  execSync(copyToClipboardCommand(code));
 }

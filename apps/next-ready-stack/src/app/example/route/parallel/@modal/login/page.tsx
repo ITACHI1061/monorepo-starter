@@ -4,7 +4,7 @@ import { Button } from '@monorepo-starter/ui/components/button';
 import { Checkbox } from '@monorepo-starter/ui/components/checkbox';
 import {
   Dialog,
-  DialogContentWithoutClose,
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -25,7 +25,7 @@ export default function AppRouteParallelLoginModal() {
 
   return (
     <Dialog open>
-      <DialogContentWithoutClose onInteractOutside={handleGoBack} onEscapeKeyDown={handleGoBack}>
+      <DialogContent onInteractOutside={handleGoBack} onEscapeKeyDown={handleGoBack} hideCloseButton>
         <div className="flex flex-col items-center gap-2">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full border" aria-hidden="true">
             <AppWindowIcon className="size-8" />
@@ -70,7 +70,7 @@ export default function AppRouteParallelLoginModal() {
         </div>
 
         <Button variant="outline">Login with Google</Button>
-      </DialogContentWithoutClose>
+      </DialogContent>
     </Dialog>
   );
 }

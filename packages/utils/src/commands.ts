@@ -1,3 +1,5 @@
+import os from 'node:os';
+
 export type EditorType =
   | 'cursor'
   | 'vscode'
@@ -39,14 +41,17 @@ export function openInEditorCommand(editor: EditorType, fileName: string, lineNu
   }
 }
 
-export function copyToClipboardCommand(platform: NodeJS.Platform, osRelease: string, text: string) {
+export function copyToClipboardCommand(text: string) {
   try {
+    const platform = os.platform();
+    const release = os.release();
+
     if (platform === 'darwin') {
       return `echo "${text}" | pbcopy`;
     } else if (platform === 'win32') {
       return `echo ${text} | clip`;
     } else if (platform === 'linux') {
-      const isWSL = osRelease.toLowerCase().includes('microsoft');
+      const isWSL = release.toLowerCase().includes('microsoft');
       if (isWSL) {
         return `echo "${text}" | clip.exe`;
       } else {

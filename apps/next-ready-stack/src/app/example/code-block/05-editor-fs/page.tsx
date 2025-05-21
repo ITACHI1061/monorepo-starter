@@ -1,6 +1,6 @@
 import { CodeInteractivePanel } from '@monorepo-starter/ui/composites/code-editor/code-interactive-panel';
+import { copyCodeToClipboard, getCodeFromFile, openInEditor, saveCodeToFile } from '~/actions/cli-actions';
 import { ButtonDemo } from './button-demo';
-import { copyCodeToClipboard, getCodeFromFile, openInCursorEditor, saveCodeToFile } from './editorActions';
 
 export default async function CodePage() {
   return (
@@ -24,7 +24,7 @@ export default async function CodePage() {
           Component={<ButtonDemo />}
           getCodeFromFilePath={getCodeFromFile}
           copyCodeToClipboard={copyCodeToClipboard}
-          openInCursorEditor={openInCursorEditor}
+          openInEditor={openInEditor}
           saveCodeToFile={saveCodeToFile}
         />
       </div>
@@ -36,7 +36,7 @@ export default async function CodePage() {
           Component={<p>This is radio group demo</p>}
           getCodeFromFilePath={getCodeFromFile}
           copyCodeToClipboard={copyCodeToClipboard}
-          openInCursorEditor={openInCursorEditor}
+          openInEditor={openInEditor}
           saveCodeToFile={saveCodeToFile}
         />
       </div>

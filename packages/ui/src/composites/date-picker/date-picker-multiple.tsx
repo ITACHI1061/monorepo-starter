@@ -26,10 +26,14 @@ export default function DatePickerMultiple({
   useEffect(() => {
     if (dates && dates.length > 0) {
       setInputValue(dates.map((d) => format(d, 'yyyy-MM-dd')).join(', '));
-      onChange && onChange(dates.map((d) => format(d, 'yyyy-MM-dd')));
+      if (onChange) {
+        onChange(dates.map((d) => format(d, 'yyyy-MM-dd')));
+      }
     } else {
       setInputValue('');
-      onChange && onChange([]);
+      if (onChange) {
+        onChange([]);
+      }
     }
   }, [dates]);
 

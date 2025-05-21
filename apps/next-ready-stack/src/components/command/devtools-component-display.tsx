@@ -11,8 +11,8 @@ import {
   Loader2Icon,
   RouteOffIcon,
 } from 'lucide-react';
+import { openInEditor } from '~/actions/cli-actions';
 import { type ComponentTreeJson } from '~/app-path-types';
-import { openInIde } from './actions';
 
 export function ComponentDisplayTree({
   componentTreeJson,
@@ -30,6 +30,10 @@ export function ComponentDisplayTree({
   const isLoading = componentTreeJson.type === 'Suspense' && componentTreeJson.fallback === 'Loading';
   const isPage = componentTreeJson.type === 'Page';
 
+  const handleOpenInEditor = (path: string) => () => {
+    void openInEditor(path);
+  };
+
   return (
     <div data-component-type={componentTreeJson.type} className={cn('flex flex-1 items-stretch gap-1')}>
       <TooltipProvider>
@@ -45,9 +49,7 @@ export function ComponentDisplayTree({
                 isLoading && 'bg-purple-200',
                 isPage && 'bg-blue-200',
               )}
-              onClick={() => {
-                openInIde(componentTreeJson.path);
-              }}
+              onClick={handleOpenInEditor(componentTreeJson.path)}
             >
               {isLayout && <LayoutIcon className="size-4" />}
               {isTemplate && <LayoutTemplateIcon className="size-4" />}

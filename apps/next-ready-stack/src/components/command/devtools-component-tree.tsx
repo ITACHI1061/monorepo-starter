@@ -8,8 +8,8 @@ import {
 } from '@monorepo-starter/ui/components/dropdown-menu';
 import { cn } from '@monorepo-starter/ui/lib/utils';
 import { toast } from 'sonner';
+import { copyCodeToClipboard, getCodeFromFile, openInEditor } from '~/actions/cli-actions';
 import { type ComponentTreeJson } from '~/app-path-types';
-import { copyToClipboard, openInIde, readCodeFromFile } from './actions';
 
 const classNames = {
   row: cn(``),
@@ -21,21 +21,21 @@ const classNames = {
 
 export function ComponentTree({ componentTreeJson }: { componentTreeJson: ComponentTreeJson }) {
   const handleOpenInIde = (path: string) => () => {
-    openInIde(path);
+    openInEditor(path);
   };
 
-  const handleCopyToClipboardPath = (path: string) => async () => {
-    await copyToClipboard(path);
+  const handleCopyToClipboardPath = (path: string) => () => {
+    copyCodeToClipboard(path);
     toast.success('Path copied to clipboard', { duration: 1000 });
   };
 
   const handleCopyToClipboardCode = (path: string) => async () => {
-    const code = await readCodeFromFile(path);
+    const code = await getCodeFromFile(path);
     if (!code) {
       return;
     }
 
-    await copyToClipboard(code);
+    copyCodeToClipboard(code);
     toast.success('Code copied to clipboard', { duration: 1000 });
   };
 

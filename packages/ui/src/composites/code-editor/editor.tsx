@@ -73,7 +73,9 @@ export function CodeEditor({
   // 코드 변경 이벤트 핸들러
   const handleOnChange = (value: string = '') => {
     setCode(value);
-    onChange && onChange(value);
+    if (onChange) {
+      onChange(value);
+    }
   };
 
   return (

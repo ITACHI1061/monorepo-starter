@@ -4,7 +4,7 @@
 import { devLog } from '@monorepo-starter/utils/console';
 import { eq } from 'drizzle-orm';
 import crypto from 'node:crypto';
-import fs from 'node:fs/promises';
+import fs from 'node:fs';
 import path from 'node:path';
 import { promisify } from 'node:util';
 import { gunzip, gzipSync } from 'node:zlib';
@@ -30,9 +30,9 @@ type HybridOptions<T> = {
 export async function apiHybridCache<T>({ key, ttl, fetcher }: HybridOptions<T>) {
   // 캐시 디렉토리 생성
   try {
-    await fs.access(cacheDir);
+    fs.accessSync(cacheDir);
   } catch {
-    await fs.mkdir(cacheDir, { recursive: true });
+    fs.mkdirSync(cacheDir, { recursive: true });
   }
 
   const traceId = generateTraceId();
@@ -66,10 +66,10 @@ export async function apiHybridCache<T>({ key, ttl, fetcher }: HybridOptions<T>)
 
   // 파일 캐시 히트 확인
   try {
-    const stat = await fs.stat(filePath);
+    const stat = fs.statSync(filePath);
     const age = now - stat.mtimeMs;
     if (age < ttl) {
-      const buffer = await fs.readFile(filePath);
+      const buffer = fs.readFileSync(filePath);
       const decompressed = await asyncGunzip(buffer);
       const data = JSON.parse(decompressed.toString());
       devLog('info', `[CACHE]`, { cacheStatus: 'HIT', hitType: 'FILE', key, traceId, compressedSize: buffer.length });
@@ -99,7 +99,7 @@ export async function apiHybridCache<T>({ key, ttl, fetcher }: HybridOptions<T>)
 
     // 파일 캐시 저장
     try {
-      await fs.writeFile(filePath, compressed);
+      fs.writeFileSync(filePath, compressed);
       devLog('info', `[CACHE]`, { cacheStatus: 'MISS', hitType: 'FILE', key, traceId, compressedSize, fetchDuration });
     } catch (err) {
       devLog('error', `[FILE_WRITE_ERROR] key=${key} path=${filePath}`, err);

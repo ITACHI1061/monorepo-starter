@@ -2,7 +2,7 @@
 
 import {
   Dialog,
-  DialogContentWithoutClose,
+  DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
@@ -37,17 +37,18 @@ export default function DetailModal({ children, className }: { children: React.R
 
   return (
     <Dialog open>
-      <DialogContentWithoutClose
+      <DialogContent
         onInteractOutside={handleGoBack}
         onEscapeKeyDown={handleGoBack}
         className={cn(className)}
+        hideCloseButton
       >
         <DialogHeader>
           <DialogTitle>Detail Modal</DialogTitle>
           <DialogDescription>Detail Modal with Parallel Route</DialogDescription>
         </DialogHeader>
         {children}
-      </DialogContentWithoutClose>
+      </DialogContent>
     </Dialog>
   );
 }
