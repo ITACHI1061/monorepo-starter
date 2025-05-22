@@ -58,8 +58,8 @@
     "sonner": "^2.0.3",
     "use-immer": "^0.11.0",
     "web-push": "^3.6.7",
-    "zod": "^3.25.9",
-    "zustand": "^5.0.4"
+    "zod": "^3.25.20",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "catalog:",
