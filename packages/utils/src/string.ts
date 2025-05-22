@@ -1,3 +1,8 @@
+import * as changeCaseFn from 'change-case';
+
+export const changeCase = changeCaseFn;
+
+// 한글 성 로마자 변환 테이블
 export const romanizedSurnames = {
   가: 'Ka',
   간: 'Kan',

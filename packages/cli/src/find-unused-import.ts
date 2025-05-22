@@ -2,10 +2,11 @@
  * 현재는 `unused-import` 기능만 구현되어 있지만, `importMap`을 활용하여 다양하게 확장 가능
  * @example
  * pnpm cli unused-import apps/next-ready-stack
- * pnpm -w cli unused-import apps/next-ready-stack
  */
+import { intro, outro, select } from '@clack/prompts';
 import { difference } from '@monorepo-starter/utils/array';
 import { devLog } from '@monorepo-starter/utils/console';
+import FastGlob from 'fast-glob';
 import fs from 'node:fs';
 import path from 'node:path';
 import { Project } from 'ts-morph';
@@ -14,14 +15,39 @@ import { Project } from 'ts-morph';
 process.chdir(path.join(import.meta.dirname, '../../..'));
 
 // Run
-const [, , workspace] = process.argv;
-if (!workspace) {
-  devLog('error', 'Workspace is required');
-  process.exit(0);
-}
-void main(workspace);
+void main();
 
-async function main(workspace: string) {
+async function main() {
+  const workspace = await findWorkspace();
+  await findAllFiles(workspace);
+}
+
+async function findWorkspace() {
+  let workspace = '';
+  if (process.argv.length === 3) {
+    workspace = process.argv[2] as string;
+  } else {
+    intro('Pick a workspace');
+    const workspaceList = await FastGlob('apps/*', { onlyDirectories: true });
+    const selectedWorkspace = await select({
+      message: 'Pick a workspace',
+      options: workspaceList.map((pathName) => ({ value: pathName })),
+    });
+    outro(`Workspace: ${selectedWorkspace.toString()}`);
+    workspace = selectedWorkspace.toString();
+  }
+
+  try {
+    fs.accessSync(path.join(workspace, 'tsconfig.json'));
+    return workspace;
+  } catch (error) {
+    process.exit(0);
+  }
+}
+
+function findAllFiles(workspace: string) {
+  devLog('info', `Workspace: ${workspace}`);
+  devLog('info', `process.cwd(): ${process.cwd()}`);
   devLog('process', `Start unused-import...`);
   const tsConfigPath = path.join(workspace, 'tsconfig.json');
 
@@ -33,7 +59,15 @@ async function main(workspace: string) {
 
   const project = new Project({ tsConfigFilePath: tsConfigPath, skipAddingFilesFromTsConfig: true });
 
-  project.addSourceFilesAtPaths(`${workspace}/src/**/*.{ts,tsx}`);
+  let findPathGlob: string[] = [];
+  try {
+    fs.accessSync(path.join(workspace, 'src'));
+    findPathGlob = [`${workspace}/src/**/*.{ts,tsx}`];
+  } catch {
+    findPathGlob = [`${workspace}/**/*.{ts,tsx}`, `!${workspace}/{node_modules,public}/**`];
+  }
+
+  project.addSourceFilesAtPaths(findPathGlob);
   devLog('process', `add files to ${workspace}...`);
 
   const localImportMap: { filePath: string; imports: string[] }[] = [];
@@ -76,9 +110,10 @@ async function main(workspace: string) {
   });
 
   const unusedImport = findUnusedImport(localImportMap);
+  devLog('success', `Search Files: ${localImportMap.length}`);
   devLog('success', `Unused Import: ${unusedImport.length}`);
   unusedImport.forEach((filePath) => {
-    devLog('info', `./${filePath}`);
+    devLog('info', `${workspace}/${filePath}`);
   });
 }
 
@@ -96,8 +131,8 @@ function findUnusedImport(localImportMap: { filePath: string; imports: string[] 
   const diff = difference([...filePathList], [...importPathList]);
 
   const regExpList = [
-    /src\/((manifest|mdx-components|middleware|instrumentation|instrumentation-client)\.(ts|tsx))$/,
-    /src\/app\/.*((layout|page|loading|not-found|error|global-error|default|route|template|default)\.(ts|tsx))$/,
+    /(src\/)?((manifest|mdx-components|middleware|instrumentation|instrumentation-client)\.(ts|tsx))$/,
+    /(src\/)?app\/.*((layout|page|loading|not-found|error|global-error|default|route|template|default)\.(ts|tsx))$/,
   ];
 
   // next.js 파일 제외
@@ -109,3 +144,5 @@ function findUnusedImport(localImportMap: { filePath: string; imports: string[] 
     return true;
   });
 }
+
+export { findUnusedImport, main };

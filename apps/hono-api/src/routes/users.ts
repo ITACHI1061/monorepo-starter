@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker/locale/ko';
 import { zValidator } from '@hono/zod-validator';
-import { romanizedSurnames } from '@monorepo-starter/utils/romanized';
+import { romanizedSurnames } from '@monorepo-starter/utils/string';
 import { format } from 'date-fns';
 import { and, asc, between, count, desc, eq, getTableColumns, gte, like, lte, sql, SQL } from 'drizzle-orm';
 import { Hono } from 'hono';

@@ -1,7 +1,7 @@
 'use server';
 
 import { faker } from '@faker-js/faker/locale/ko';
-import { romanizedSurnames } from '@monorepo-starter/utils/romanized';
+import { romanizedSurnames } from '@monorepo-starter/utils/string';
 import { format } from 'date-fns';
 import { revalidateTag } from 'next/cache';
 import { usersTable } from '~/db/schema';
