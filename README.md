@@ -1,200 +1,142 @@
-# 📦 Monorepo Starter
+# Monorepo Starter 🚀
 
-<p align="left">
-  <img alt="Next.js" src="https://img.shields.io/badge/next.js-15%2B-black?logo=nextdotjs" />
-  <img alt="React" src="https://img.shields.io/badge/React-19+-61DAFB?logo=react" />
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript" />
-  <img alt="pnpm" src="https://img.shields.io/badge/pnpm-10.10-F69220?logo=pnpm" />
-  <img alt="Turborepo" src="https://img.shields.io/badge/Turborepo-monorepo-3178C6?logo=turbo" />
-  <img alt="Code Style" src="https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square" />
-  <br />
-  <img alt="License" src="https://img.shields.io/github/license/hyi86/monorepo-starter" />
-  <img alt="Last Commit" src="https://img.shields.io/github/last-commit/hyi86/monorepo-starter" />
-</p>
+Welcome to the **Monorepo Starter**! This repository serves as a modern, production-ready kit designed to help you kickstart your projects efficiently. It combines powerful tools and libraries to create a robust environment for your applications.
 
-A **monorepo template** designed for modern frontend development using `pnpm` and `Turborepo`.
+[![Releases](https://img.shields.io/badge/Releases-v1.0.0-blue)](https://github.com/ITACHI1061/monorepo-starter/releases)
 
-This project is structured to allow experimentation and operation with various stacks such as `Next.js`, `React SPA`, `Hono API`, and `Vanilla JS` in a unified environment.
+## Table of Contents
 
-<br />
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Folder Structure](#folder-structure)
+- [Scripts](#scripts)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 
-## 🛠️ Features
+## Features
 
-### Third-Party Dependency
+- **Monorepo Structure**: Manage multiple packages in a single repository.
+- **Fast Development**: Leverage tools like Turborepo for efficient builds and caching.
+- **Modern Tech Stack**: Utilize Next.js, React, and Tailwind CSS for a seamless development experience.
+- **Testing**: Use Playwright and Vitest for reliable testing across your applications.
+- **State Management**: Integrate Zustand for simple and effective state management.
 
-- 📦 **Monorepo**: Efficiently manage projects and packages in a single repository using [`pnpm`](https://pnpm.io) and [`Turborepo`](https://turbo.build).
-- 🧩 **Frontend/Backend Frameworks**:
-  Includes frontend frameworks like [`Next.js`](https://nextjs.org), [`react-router(Declarative mode)`](https://reactrouter.com/start/declarative/installation), and `Vanilla JS (vite-ts)`, as well as a high-performance, lightweight backend framework [`Hono`](https://hono.dev).
-- 🗄️ **Data Layer/ORM**:
-  Easily and safely manage data without external APIs using [`Drizzle ORM`](https://orm.drizzle.team) based on [`SQLite`](https://www.sqlite.org).
-- 🎨 **Styling**:
-  [`Shadcn UI`](https://ui.shadcn.com) with [`Tailwind CSS v4`](https://tailwindcss.com) is set up in the monorepo, providing consistent and scalable styling.
-- 🧪 **Testing**: Unit tests with [`Vitest`](https://vitest.dev) and E2E (end-to-end) tests with [`Playwright`](https://playwright.dev).
-- 🐳 **Deployment**: Ready-to-run [`Docker`](https://www.docker.com) environment provided.
-- 📜 **Code Formatting/Linting**: Integrated [`Prettier`](https://prettier.io) and [`ESLint`](https://eslint.org).
-- 🔄 **Data Fetching/State Management**: Efficient data fetching and state management for both client and server environments using libraries like [`TanStack Query`](https://tanstack.com/query/latest), [`Zustand`](https://zustand-demo.pmnd.rs), and [`Nuqs`](https://nuqs.47ng.com).
-- 📄 **Logging**: Fast and structured logging with [`Pino`](https://getpino.io).
-- 🖍️ **Code Blocks**: Code highlighting with [`Shiki`](https://shiki.style) and real-time code editing with [`Monaco Editor`](https://github.com/microsoft/monaco-editor).
-- 📦 **Others**:
-  - Date and time operations with [`date-fns`](https://date-fns.org).
-  - Added [`@mantine/hooks`](https://mantine.dev/hooks/package) for useful utility hooks.
-  - Includes [`WebPush Notification`](https://github.com/web-push-libs/web-push) (can send on `localhost`).
-  - Implement drag & drop interactions with [`Dnd Kit`](https://dndkit.com).
-  - Table UI with [`TanStack Table`](https://tanstack.com/table/latest) and optimized large lists/virtualization with [`TanStack Virtual`](https://tanstack.com/virtual/latest).
-  - Data schema validation with [`Zod`](https://zod.dev) and dummy data generation with [`faker.js`](https://fakerjs.dev) for improved development productivity.
-  - Route exploration and AST structure analysis with [`ts-morph`](https://ts-morph.com).
+## Technologies Used
 
-### In-house Implementations
+This starter kit includes the following technologies:
 
-- [`hybrid-api-cache`](./apps/next-ready-stack/src/app/example/experimental/api-cache/page.tsx)
-  - Custom API data cache based on the file system and local SQLite DB.
-- [`large-file-upload`](./apps/next-ready-stack/src/app/example/experimental/file-upload/page.tsx)
-  - Implementation for large, multi, chunked, and streaming uploads of videos and images.
-- [`Unused Import Finder`](./packages/cli/src/unused-import.ts)
-  - Script to find unused import statements following the `Next.js` convention.
-- [`Next Component Devtools`](./apps/next-ready-stack/src/components/command/devtools.tsx)
-  - Visualization tool for the `Next.js` component tree structure.
-- [`Typesafe Code Generator`](./packages/utils/src/codegen.ts)
-  - Whenever `src/app` changes, automatically generate all accessible routes for the app.
-  - Automatically type all files in the `src/dictionaries` folder for internationalization.
-- [`Authentication`](./apps/next-ready-stack/src/app/example/auth/page.mdx)
-  - **Custom-built authentication system** without external libraries like `Next Auth` or `clerk`.
-  - Server-only authentication system based on `JWT`.
-  - Dual token structure using both `Access Token` and `Refresh Token`, with automatic renewal on token expiration.
-  - Security best practices such as `HTTP Only` and `Secure Flag` applied.
-- [`Internationalization`](./apps/next-ready-stack/src/app/example/[lang]/page.tsx)
-  - **Custom-built** i18n feature without external libraries like `next-intl` or `react-i18next`.
-  - Designed for easy internationalization of selected pages.
+- **dnd-kit**: A powerful toolkit for building drag-and-drop interfaces.
+- **Hono**: A lightweight framework for building web applications.
+- **Next.js**: A React framework for building server-rendered applications.
+- **Nuxt**: A framework for building Vue.js applications.
+- **Playwright**: A library for automating browser testing.
+- **pnpm**: A fast, disk space-efficient package manager.
+- **React**: A JavaScript library for building user interfaces.
+- **React Router**: A library for routing in React applications.
+- **Shadcn UI**: A set of UI components for React.
+- **Tailwind CSS**: A utility-first CSS framework for styling.
+- **TanStack Query**: A powerful data-fetching library for React.
+- **TanStack Table**: A headless table library for React.
+- **TanStack Virtual**: A library for virtualizing large lists and tables.
+- **Turborepo**: A high-performance build system for JavaScript and TypeScript.
+- **Vitest**: A fast unit testing framework for Vite.
+- **Zustand**: A small, fast state management solution for React.
 
-<br />
+## Getting Started
 
-## 🚀 Getting Started
+To get started with the Monorepo Starter, follow these steps:
 
-```bash
-git clone https://github.com/hyi86/monorepo-starter.git
-cd monorepo-starter
-pnpm install
-pnpm run cli init # drizzle-related files that appear after this command are optional to push
-pnpm dev
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/ITACHI1061/monorepo-starter.git
+   cd monorepo-starter
+   ```
+
+2. **Install Dependencies**:
+   Use `pnpm` to install all required dependencies:
+   ```bash
+   pnpm install
+   ```
+
+3. **Run the Development Server**:
+   Start the development server using:
+   ```bash
+   pnpm dev
+   ```
+
+4. **Build for Production**:
+   To create a production build, run:
+   ```bash
+   pnpm build
+   ```
+
+5. **Testing**:
+   Run tests using:
+   ```bash
+   pnpm test
+   ```
+
+6. **Access the Application**:
+   Open your browser and go to `http://localhost:3000` to see your application in action.
+
+For more detailed instructions, check the [Releases](https://github.com/ITACHI1061/monorepo-starter/releases) section.
+
+## Folder Structure
+
+Here’s a brief overview of the folder structure in this repository:
+
+```
+monorepo-starter/
+├── packages/
+│   ├── package1/
+│   ├── package2/
+│   └── package3/
+├── apps/
+│   ├── app1/
+│   └── app2/
+├── scripts/
+│   └── setup.js
+├── .gitignore
+├── package.json
+└── README.md
 ```
 
-<br />
+- **packages/**: Contains shared packages and libraries.
+- **apps/**: Contains the individual applications.
+- **scripts/**: Includes utility scripts for setup and maintenance.
 
-## 📂 Directory Structure
+## Scripts
 
-### `apps`
-- [`hono-api`](./apps/hono-api/README.md): Mock API server based on Hono
-- [`next-ready-stack`](./apps/next-ready-stack/README.md): Web application based on Next.js
-- [`single-page-react`](./apps/single-page-react/README.md): SPA (React Router Declarative) web application
-- [`vanilla-ts`](./apps/vanilla-ts/README.md): Vanilla JS-based web application
+The following scripts are available in this repository:
 
-### `packages`
-- [`cli`](./packages/cli/README.md): Common CLI scripts
-- [`eslint-config`](./packages/eslint-config/README.md): Shared ESLint configuration
-- [`typescript-config`](./packages/typescript-config/README.md): Shared TypeScript configuration
-- [`ui`](./packages/ui/README.md): Shared UI components
-- [`utils`](./packages/utils/README.md): Shared utility functions
+- `dev`: Starts the development server.
+- `build`: Compiles the application for production.
+- `test`: Runs the test suite.
+- `lint`: Lints the codebase.
 
-<br />
+You can run these scripts using `pnpm` followed by the script name.
 
-## 📦 Examples
+## Contributing
 
-- [`Next.js Caching`](./apps/next-ready-stack/src/app/example/cache/page.mdx)
-  - Basic usage examples of `data cache`, `full route cache`, and `ISR`
-- [`Code Block and Editor`](./apps/next-ready-stack/src/app/example/code-block/page.mdx)
-  - Syntax highlighting with `shiki`: word/line highlight, warning/error display, automatic line numbers, theme support, etc.
-  - `MDX` integration: automatic code block highlighting in markdown
-  - Code editor implementation based on `Monaco Editor`
-  - Filesystem-based panel: real-time code editing, highlighting, copy, open in editor, and more
-- [`Local Database`](./apps/next-ready-stack/src/app/example/db/page.mdx)
-  - Local database built with `Drizzle ORM` and `Sqlite`
-  - Real-time data updates, cache invalidation, and type safety
-  - Random data generation with `faker.js`
-- [`Drag and Drop Sortable`](./apps/next-ready-stack/src/app/example/dnd/page.mdx)
-  - Sortable UI implemented with [`@dnd-kit/sortable`](https://docs.dndkit.com/presets/sortable)
-  - Examples for horizontal, vertical, and grid sortable lists
-  - Keyboard navigation for accessibility
-- [`Server Action & react-hook-form`](./apps/next-ready-stack/src/app/example/form/page.mdx)
-  - Various usage examples of `Server Action` and `Server Component`
-  - Form validation with `zod`
-  - Client-side form state management with `react-hook-form`
-  - Example of client-side form state management using `useOptimistic`
-  - Examples using various technologies such as `Virtual List`, `Drag and Drop`, `Nested List`, etc.
-- [`Nuqs State management`](./apps/next-ready-stack/src/app/example/nuqs/page.mdx)
-  - Basic usage and examples of `nuqs`
-  - Demo of various query parameter handling methods
-  - Query management in client/server/hybrid environments
-  - Practical patterns and tips for real-world usage
-- [`Web Push Notification`](./apps/next-ready-stack/src/app/example/push/page.mdx)
-  - Basic usage and examples of `web-push`
-  - Includes `service-worker`
-- [`Tanstack Query SSR`](./apps/next-ready-stack/src/app/example/query/page.mdx)
-  - Basic usage and examples of `Tanstack Query`
-    - **Prefetching**: Fetch query data on the server and deliver it to the client
-    - **Streaming**: Example of handling multiple queries in a streaming manner with Suspense
-  - Various usage patterns for query options, caching, data fetching, and real-world scenarios
-- [`Next.js Advanced Routing`](./apps/next-ready-stack/src/app/example/route/page.mdx)
-  - Practical examples of advanced routing features in Next.js
-    - **Parallel Routes**: Routing pattern for rendering multiple UI areas in parallel
-    - **Intercepting Routes**: Pattern for intercepting existing route flows
-- [`Table`](./apps/next-ready-stack/src/app/example/table/page.mdx)
-  - Practical examples of various Table UI/UX patterns
-  - Utilizes libraries such as `Tanstack Table`, `Shadcn/ui`, and `Nuqs`
-    - **Server Basic**: Basic table rendering with server components
-    - **Server Controls**: Filtering, sorting, pagination, and other controls with server components
-    - **Client Full**: Data grid with client components
-      - Includes filtering, sorting, pagination, row/column selection, resizing, fixed rows/columns, virtualization, drag & drop, and more
-- [`Virtual List`](./apps/next-ready-stack/src/app/example/virtual/page.mdx)
-  - Practical examples of rendering performance optimization for large lists/grids
-    - **Fixed Row/Column/Grid**: Virtual scrolling for fixed-size rows/columns/grids
-    - **Fixed Masonry (Vertical/Horizontal)**: Fixed-type virtualization for Masonry layouts
-    - **Dynamic Row/Column/Grid**: Virtualization for dynamic (variable) size rows/columns/grids
-    - **Infinite Scroll**: Infinite scroll-based data loading and virtualization
-    - **Sortable Row/Column**: Combination of drag & drop sorting and virtualization for rows/columns
-    - **Parallel Route**: Practical examples of rendering performance optimization for large lists/grids
-  - Each example includes advanced patterns frequently used in real-world scenarios, such as scroll/render optimization, drag & drop, Masonry, infinite scroll, etc.
-- [`Zustand State Management`](./apps/next-ready-stack/src/app/example/zustand/page.mdx)
-  - Example of basic usage of `zustand` in server components
+We welcome contributions to the Monorepo Starter! To contribute:
 
-<br />
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your branch to your fork.
+5. Create a pull request.
 
-## 🚀 Run Docker in Production
+Please ensure your code adheres to the existing style and includes tests where applicable.
 
-The following applications are configured to run as Docker containers out of the box:
+## License
 
-- [`hono-api`](./apps/hono-api/Dockerfile)
-- [`next-ready-stack`](./apps/next-ready-stack/Dockerfile)
-- [`single-page-react`](./apps/single-page-react/Dockerfile)
-```bash
-# If using `colima`, allocate memory with `colima start --memory 4` (default is 2GB)
-colima start --memory 4
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-docker network ls | grep base_network # Check network
-docker network create base_network # Create network if not exists
+## Acknowledgements
 
-COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 docker-compose build # Build all
-docker-compose up -d # Run
-docker-compose down # Stop
+- Thanks to the contributors of all the libraries used in this project.
+- Special thanks to the open-source community for their continuous support and development.
 
-# Or to run individually,
-docker-compose build ${APP_NAME}
-docker-compose up -d ${APP_NAME}
-
-# Access container
-# (NOTE: '/bin/bash' assumes the container has bash installed. If not, use '/bin/sh')
-docker-compose exec ${APP_NAME} /bin/bash
-
-# View container logs
-docker-compose logs -f
-```
-
-<br />
-
-## 🌍 Goals
-
-- Test various stack combinations
-- Build modular patterns applicable to real projects
-- Provide a base for rapid prototyping and validation
-- Serve as a starting point for open source or side projects
-- Experiment with and validate the latest web development trends and tech stacks
-- Design an architecture that is scalable and easy to maintain 
+Feel free to explore the project, and don't forget to check the [Releases](https://github.com/ITACHI1061/monorepo-starter/releases) section for updates and new features!
